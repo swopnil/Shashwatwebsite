@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronos Admin - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #2a2a2a;
+            --accent: #c4a777;
+            --light: #fff;
+            --gray: #f5f5f5;
+        }
+
+        body {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background: var(--primary);
+            color: var(--light);
+            padding: 2rem;
+            position: fixed;
+            height: 100vh;
+            width: 250px;
+        }
+
+        .sidebar-header {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-header h2 {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: var(--secondary);
+        }
+
+        .nav-links i {
+            margin-right: 1rem;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            padding: 2rem;
+            margin-left: 250px;
+            background: var(--gray);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .content-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Blog Post Form */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--accent);
+            color: var(--light);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #b39265;
+        }
+
+        /* Messages Table */
+        .messages-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .messages-table th,
+        .messages-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .messages-table th {
+            background: var(--gray);
+            font-weight: 600;
+        }
+
+        .status-new {
+            color: #2196F3;
+            font-weight: 500;
+        }
+
+        .status-read {
+            color: #4CAF50;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Chronos Admin</h2>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="#" class="tab-link active" data-tab="dashboard">
+                    <i class="fas fa-chart-line"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="#" class="tab-link" data-tab="blog-posts">
+                    <i class="fas fa-blog"></i>
+                    Blog Posts
+                </a>
+            </li>
+            <li>
+                <a href="#" class="tab-link" data-tab="messages">
+                    <i class="fas fa-envelope"></i>
+                    Messages
+                </a>
+            </li>
+            <li>
+                <a href="index.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="dashboard-header">
+            <h1>Welcome, Admin</h1>
+        </div>
+
+        <div class="tab-content active" id="dashboard">
+            <div class="content-card">
+                <h2>Overview</h2>
+                <div class="stats">
+                    <!-- Stats will be dynamically populated -->
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="blog-posts">
+            <div class="content-card">
+                <h2>Create New Blog Post</h2>
+                <form id="blogForm">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea id="content" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Featured Image</label>
+                        <input type="file" id="image" accept="image/*">
+                    </div>
+                    <button type="submit" class="submit-btn">Publish Post</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="tab-content" id="messages">
+            <div class="content-card">
+                <h2>Contact Messages</h2>
+                <table class="messages-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messagesTableBody">
+                        <!-- Messages will be dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab Switching
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabId = link.getAttribute('data-tab');
+                
+                // Update active states
+                tabLinks.forEach(l => l.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                link.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Blog Post Form Handler
+        const blogForm = document.getElementById('blogForm');
+        blogForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const imageFile = document.getElementById('image').files[0];
+
+            // In a real application, you would upload this to your server
+            console.log('New blog post:', { title, content, imageFile });
+            alert('Blog post created successfully!');
+            blogForm.reset();
+        });
+
+        // Sample Messages Data
+        const messages = [
+            {
+                name: 'John Doe',
+                email: 'john@example.com',
+                message: 'Interested in the Classic Collection',
+                status: 'new',
+                date: '2025-01-09'
+            },
+            {
+                name: 'Jane Smith',
+                email: 'jane@example.com',
+                message: 'Question about shipping',
+                status: 'read',
+                date: '2025-01-08'
+            }
+        ];
+
+        // Populate Messages Table
+        const messagesTableBody = document.getElementById('messagesTableBody');
+        messages.forEach(msg => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${msg.name}</td>
+                <td>${msg.email}</td>
+                <td>${msg.message}</td>
+                <td><span class="status-${msg.status}">${msg.status}</span></td>
+                <td>${msg.date}</td>
+            `;
+            messagesTableBody.appendChild(row);
+        });
+
+        // Dashboard Stats
+        const stats = document.querySelector('.stats');
+        stats.innerHTML = `
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 1rem;">
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <h3 style="color: #1a1a1a; margin-bottom: 0.5rem;">Total Products</h3>
+                    <p style="font-size: 2rem; color: #c4a777;">24</p>
+                </div>
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <h3 style="color: #1a1a1a; margin-bottom: 0.5rem;">Blog Posts</h3>
+                    <p style="font-size: 2rem; color: #c4a777;">8</p>
+                </div>
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <h3 style="color: #1a1a1a; margin-bottom: 0.5rem;">New Messages</h3>
+                    <p style="font-size: 2rem; color: #c4a777;">3</p>
+                </div>
+            </div>
+        `;
+    </script>
+</body>
+</html>
