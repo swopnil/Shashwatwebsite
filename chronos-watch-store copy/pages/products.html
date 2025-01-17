@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Timepieces</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="../assets/css/nav.css">
+
+    <style>
+
+
+        body {
+            padding-top: 60px;
+        }
+             .quick-view-btn {
+            background: white;
+            color: var(--black);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .quick-view-btn:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+
+        /* Header Styles */
+        header {
+            background: var(--primary);
+            color: var(--light);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+        }
+
+       
+        /* Product Styles */
+        .product-card {
+            background: white;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            position: relative;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 300;
+            background: #ffffff;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .price-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(3px);
+        }
+
+        .product-card:hover .overlay {
+            opacity: 1;
+        }
+
+        .quick-view-btn {
+            background: white;
+            color: var(--black);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .quick-view-btn:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        .product-card:hover .quick-view-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--black);
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .add-to-cart-btn {
+            background: var(--gold);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--dark-gold);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+        .product-card:hover .quick-view-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .cart-popup {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease-out;
+        }
+
+        .cart-popup.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+
+<body>
+   
+    
+    <header>
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="navbar-brand">CHRONOS</a>
+                <button class="nav-toggle">☰</button>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li>
+                        <a href="checkout.html" class="nav-link cart-link">
+                            <span class="cart-icon"></span>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+         <!-- Featured Products Section -->
+         <section class="products-section">
+            <div class="container">
+                <h2 class="section-title">Products</h2>
+                <div class="products-grid" id="featured-products">
+                    <!-- Products will be inserted here by JavaScript -->
+                </div>
+                <div class="text-center">
+                    <a href="products.html" class="view-more">View More Products</a>
+                </div>
+            </div>
+        </section>
+   
+    </div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body">
+                <div class="product-grid">
+                    <div class="product-image-section">
+                        <img id="modalImage" src="" alt="" class="product-image-large">
+                        <div class="text-center">
+                            <span id="modalPrice" class="modal-price-tag"></span>
+                            <button class="add-to-cart-btn" onclick="addToCartFromModal()">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h2 id="modalTitle" class="h3 mb-4"></h2>
+                    
+                        <div id="descriptionTab" class="tab-content active">
+                            <p id="modalDescription" class="lead"></p>
+                            <div class="mt-4">
+                            </div>
+                        </div>
+                       
+                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Popup Notification -->
+    <div id="cartPopup" class="cart-popup">
+        <i class="fas fa-check-circle text-success"></i>
+        <span>Item added to cart!</span>
+    </div>
+    <script>
+        // Product Data
+        const featuredProducts = [
+            {
+                name: "G-Shock Rainbow Brick Wall",
+                price: "$120",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-dw5600-rainbow-brick-wall-digital-black-dw-5600rw-1-523081.jpg",
+                description: "Digital watch with rainbow brick wall pattern and robust features",
+                features: [
+                    "Shock Resistant Structure",
+                    "200M Water Resistance",
+                    "EL Backlight with Afterglow",
+                    "Rainbow Brick Pattern Design",
+                    "5 Daily Alarms",
+                    "World Time Function"
+                ]
+            },
+            {
+                name: "G-Shock Mudmaster",
+                price: "$400",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gw9500-mudmaster-master-of-g-digital-black-gw-9500mec-1-461314.jpg",
+                description: "Professional-grade digital watch with multiple sensors",
+                features: [
+                    "Mud Resist Construction",
+                    "Twin Sensor",
+                    "Super Illuminator LED Light",
+                    "Carbon Core Guard Structure",
+                    "Auto Calendar",
+                    "Vibration Resistance"
+                ]
+            },
+            {
+                name: "G-Shock GM2100 Rainbow",
+                price: "$220",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gm2100-rainbow-brick-wall-ana-digi-black-silver-gm-2100-rw-1a-743773.jpg",
+                description: "Ana-digi combination with rainbow accent design",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            },
+            {
+                name: "G-Shock Rainbow Brick Wall",
+                price: "$120",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-dw5600-rainbow-brick-wall-digital-black-dw-5600rw-1-523081.jpg",
+                description: "Digital watch with rainbow brick wall pattern and robust features",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            },
+            {
+                name: "G-Shock Mudmaster",
+                price: "$400",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gw9500-mudmaster-master-of-g-digital-black-gw-9500mec-1-461314.jpg",
+                description: "Professional-grade digital watch with multiple sensors",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            },
+            {
+                name: "G-Shock GM2100 Rainbow",
+                price: "$220",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gm2100-rainbow-brick-wall-ana-digi-black-silver-gm-2100-rw-1a-743773.jpg",
+                description: "Ana-digi combination with rainbow accent design",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            },
+            {
+                name: "Olto-8 Shot Skeleton",
+                price: "$400",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/olto-8-shot-skeleton-automatic-red-v3-1031-s14-622783.jpg",
+                description: "Skeleton automatic watch with unique design",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            },
+            {
+                name: "Olto-8 Coral Steward",
+                price: "$399",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/olto-8-coral-steward-diving-automatic-retro-green-o4-2282-s08-230357.jpg",
+                description: "Diving watch with vintage-inspired design",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            },
+            {
+                name: "G-Shock GM700 G-Steel",
+                price: "$240",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gm700-g-steel-ana-digi-purple-gm-700p-6a-850240.jpg",
+                description: "G-Steel series with purple accents",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            },
+            {
+                name: "G-Shock Metal Navy",
+                price: "$300",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gm2110d-metal-ana-digi-navy-gm-2110d-2b-798031.jpg",
+                description: "Metal bezel G-Shock with navy blue accents",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            },
+            {
+                name: "G-Shock Metal Green",
+                price: "$300",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gm2110d-metal-ana-digi-green-gm-2110d-3a-412436.jpg",
+                description: "Metal bezel G-Shock with green accents",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            },
+            {
+                name: "Duxot Atlantica Blue",
+                price: "$279",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/duxot-atlantica-diver-automatic-deep-blue-dx-2057-44-155477.jpg",
+                description: "Professional diver watch with blue dial",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            },
+            {
+                name: "Duxot Atlantica Brown",
+                price: "$279",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/duxot-atlantica-diver-automatic-chocolate-brown-dx-2057-99-725813.jpg",
+                description: "Elegant diver watch with brown dial",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            }
+        ];
+
+        // Blog Data
+        const blogPosts = [
+            {
+                title: "The Evolution of Smartwatches",
+                excerpt: "Explore how traditional watchmaking meets modern technology in the era of smart timepieces...",
+                image: "https://res.cloudinary.com/dpb2hk8jh/image/upload/v1736524138/Screenshot_2025-01-10_at_10.48.29_AM_j0r6xr.png",
+                author: "Shashwat Shrestha",
+                date: "January 9, 2025",
+                readTime: "5 min read"
+            },
+            {
+                title: "Sustainable Practices in Watch Manufacturing",
+                excerpt: "Discover how luxury watch brands are adopting eco-friendly practices while maintaining quality...",
+                image: "https://res.cloudinary.com/dpb2hk8jh/image/upload/v1736524369/Screenshot_2025-01-10_at_10.52.43_AM_zyphr5.png",
+                author: "Shashwat Shrestha",
+                date: "January 8, 2025",
+                readTime: "4 min read"
+            },
+            {
+                title: "The Art of Watch Movement",
+                excerpt: "Understanding the intricate mechanics behind luxury timepieces and their precise movements...",
+                image: "https://res.cloudinary.com/dpb2hk8jh/image/upload/v1736524417/nbtaz8uun6r9wrwpz0kl.png",
+                author: "Shashwat Shrestha",
+                date: "January 7, 2025",
+                readTime: "6 min read"
+            }
+            
+        ];
+
+        // Populate Products
+        document.getElementById('featured-products').innerHTML = featuredProducts.map((product, index) => `
+            <div class="product-card">
+                <div class="product-image-container">
+                    <span class="price-badge">${product.price}</span>
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="overlay">
+                        <button class="quick-view-btn" onclick="showQuickView(${index})">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">${product.name}</h3>
+                    <p class="product-description">${product.description}</p>
+                    <button class="cart-button" onclick="addToCart(${index})">
+                        <span class="cart-icon"></span>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        `).join('');
+
+        // Populate Blog Posts
+        document.getElementById('latest-blogs').innerHTML = `
+            <div class="blog-grid">
+                ${blogPosts.map(post => `
+                    <div class="blog-card">
+                        <div class="blog-image-container">
+                            <img src="${post.image}" alt="${post.title}" class="blog-image">
+                        </div>
+                        <div class="blog-info">
+                            <h3 class="blog-title">${post.title}</h3>
+                            <p class="blog-description">${post.excerpt}</p>
+                            <div class="blog-meta">
+                                <span class="date">${post.date}</span>
+                                <span class="read-time">${post.readTime}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+
+        // Populate Blog Table
+        document.getElementById('blog-table-body').innerHTML = blogPosts.map(post => `
+            <tr>
+                <td>${post.title}</td>
+                <td>${post.author}</td>
+                <td>${post.date}</td>
+                <td>${post.readTime}</td>
+            </tr>
+        `).join('');
+
+        // Quick View Function
+        function showQuickView(index) {
+            const product = featuredProducts[index];
+            const modal = document.getElementById('productModal');
+            
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalTitle').textContent = product.name;
+            document.getElementById('modalPrice').textContent = product.price;
+            document.getElementById('modalDescription').textContent = product.description;
+            document.getElementById('modalFeatures').innerHTML = product.features
+                .map(feature => `<li>${feature}</li>`)
+                .join('');
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cart Functions
+        let cart = [];
+        
+        function addToCart(index) {
+            const product = featuredProducts[index];
+            cart.push(product);
+            updateCartCount();
+            showCartPopup();
+        }
+
+        function addToCartFromModal() {
+            const productName = document.getElementById('modalTitle').textContent;
+            const product = featuredProducts.find(p => p.name === productName);
+            if (product) {
+                cart.push(product);
+                updateCartCount();
+                showCartPopup();
+            }
+            closeModal();
+        }
+
+        function updateCartCount() {
+            document.getElementById('cartCount').textContent = cart.length;
+        }
+
+        function showCartPopup() {
+            const popup = document.getElementById('cartPopup');
+            popup.classList.add('show');
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 3000);
+        }
+
+        // Blog View Toggle
+        document.querySelectorAll('.view-toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const view = toggle.dataset.view;
+                document.querySelectorAll('.view-toggle').forEach(btn => btn.classList.remove('active'));
+                toggle.classList.add('active');
+                
+                if (view === 'grid') {
+                    document.querySelector('.blog-grid-view').classList.add('active');
+                    document.querySelector('.blog-table-view').classList.remove('active');
+                } else {
+                    document.querySelector('.blog-grid-view').classList.remove('active');
+                    document.querySelector('.blog-table-view').classList.add('active');
+                }
+            });
+        });
+
+        // Navigation Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('productModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+   
+
+    <script>
+        // Product data
+        const products = [
+            {
+                name: "G-Shock Rainbow Brick Wall",
+                price: "$120",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-dw5600-rainbow-brick-wall-digital-black-dw-5600rw-1-523081.jpg",
+                description: "Digital watch with rainbow brick wall pattern and robust features"
+            },
+            {
+                name: "G-Shock Mudmaster",
+                price: "$400",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gw9500-mudmaster-master-of-g-digital-black-gw-9500mec-1-461314.jpg",
+                description: "Professional-grade digital watch with multiple sensors"
+            },
+            {
+                name: "G-Shock GM2100 Rainbow",
+                price: "$220",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gm2100-rainbow-brick-wall-ana-digi-black-silver-gm-2100-rw-1a-743773.jpg",
+                description: "Ana-digi combination with rainbow accent design"
+            },
+            {
+                name: "Olto-8 Shot Skeleton",
+                price: "$400",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/olto-8-shot-skeleton-automatic-red-v3-1031-s14-622783.jpg",
+                description: "Skeleton automatic watch with unique design"
+            },
+            {
+                name: "Olto-8 Coral Steward",
+                price: "$399",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/olto-8-coral-steward-diving-automatic-retro-green-o4-2282-s08-230357.jpg",
+                description: "Diving watch with vintage-inspired design"
+            },
+            {
+                name: "G-Shock GM700 G-Steel",
+                price: "$240",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gm700-g-steel-ana-digi-purple-gm-700p-6a-850240.jpg",
+                description: "G-Steel series with purple accents"
+            },
+            {
+                name: "G-Shock Metal Navy",
+                price: "$300",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gm2110d-metal-ana-digi-navy-gm-2110d-2b-798031.jpg",
+                description: "Metal bezel G-Shock with navy blue accents"
+            },
+            {
+                name: "G-Shock Metal Green",
+                price: "$300",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gm2110d-metal-ana-digi-green-gm-2110d-3a-412436.jpg",
+                description: "Metal bezel G-Shock with green accents"
+            },
+            {
+                name: "Duxot Atlantica Blue",
+                price: "$279",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/duxot-atlantica-diver-automatic-deep-blue-dx-2057-44-155477.jpg",
+                description: "Professional diver watch with blue dial"
+            },
+            {
+                name: "Duxot Atlantica Brown",
+                price: "$279",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/duxot-atlantica-diver-automatic-chocolate-brown-dx-2057-99-725813.jpg",
+                description: "Elegant diver watch with brown dial"
+            }
+        ];
+
+        // Function to create product cards
+        function createProductCards() {
+            const container = document.getElementById('products-container');
+            container.innerHTML = ''; // Clear existing content
+            
+            products.forEach((product, index) => {
+                const delay = index * 0.1;
+                const productHTML = `
+                    <div class="col-lg-3 col-md-6" style="animation-delay: ${delay}s">
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <span class="price-tag">${product.price}</span>
+                                <img 
+                                    src="${product.image}" 
+                                    alt="${product.name}" 
+                                    class="product-image"
+                                    onerror="this.src='/api/placeholder/400/300'"
+                                >
+                                <div class="overlay">
+                                    <button class="quick-view-btn">Quick View</button>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">${product.name}</h3>
+                                <p class="product-description">${product.description}</p>
+                                <button class="add-to-cart-btn" onclick="addToCart(${index})">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += productHTML;
+            });
+        }
+
+        // Function to add item to cart
+        function addToCart(productIndex) {
+            const product = products[productIndex];
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Show popup notification
+            showCartPopup();
+        }
+
+        // Function to show cart popup
+        function showCartPopup() {
+            const existingPopup = document.querySelector('.cart-popup');
+            if (existingPopup) {
+                existingPopup.remove();
+            }
+
+            const popup = document.createElement('div');
+            popup.className = 'cart-popup';
+            popup.innerHTML = `
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fas fa-check-circle text-success"></i>
+                    <span>Item added to cart! <a href="checkout.html" class="text-primary">View Cart</a></span>
+                </div>
+            `;
+            document.body.appendChild(popup);
+            
+            // Trigger reflow before adding show class
+            popup.offsetHeight;
+            popup.classList.add('show');
+            
+            setTimeout(() => {
+                popup.classList.remove('show');
+                setTimeout(() => {
+                    popup.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', createProductCards);
+    </script>
+
+</body>
+</html>

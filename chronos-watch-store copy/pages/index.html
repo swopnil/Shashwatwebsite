@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronos - Luxury Watch Store</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="navbar-brand">CHRONOS</a>
+            <button class="nav-toggle">☰</button>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="products.html" class="nav-link">Products</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li>
+                    <a href="checkout.html" class="nav-link cart-link">
+                        <span class="cart-icon"></span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Timeless Elegance</h1>
+            <p class="hero-text">Discover our exclusive collection of luxury timepieces that blend sophistication with precision.</p>
+            <a href="products.html" class="view-more">Explore Collection</a>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">Featured Collection</h2>
+            <div class="products-grid" id="featured-products">
+                <!-- Products will be inserted here by JavaScript -->
+            </div>
+            <div class="text-center">
+                <a href="products.html" class="view-more">View More Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Insights Section -->
+    <section class="blog-section">
+        <div class="container">
+            <h2 class="section-title">Latest Insights</h2>
+            <div class="blog-views">
+                <button class="view-toggle active" data-view="grid">Grid View</button>
+                <button class="view-toggle" data-view="table">Table View</button>
+            </div>
+            <div class="blog-grid-view active" id="latest-blogs">
+                <!-- Blog posts will be inserted here by JavaScript -->
+            </div>
+            <div class="blog-table-view">
+                <table class="blog-table">
+                    <thead>
+                        <tr>
+                            <th>Article</th>
+                            <th>Author</th>
+                            <th>Date</th>
+                            <th>Read Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="blog-table-body">
+                        <!-- Table rows will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center">
+                <a href="blog.html" class="view-more">Read More Articles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img id="modalImage" src="" alt="">
+                </div>
+                <div class="modal-details">
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalPrice" class="modal-price"></p>
+                    <p id="modalDescription"></p>
+                    <div class="modal-features">
+                        <h3>Key Features</h3>
+                        <ul id="modalFeatures"></ul>
+                    </div>
+                    <button class="cart-button" onclick="addToCartFromModal()">
+                        <span class="cart-icon"></span>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Popup -->
+    <div id="cartPopup" class="cart-popup">
+        <span class="success-icon">✓</span>
+        Item added to cart!
+    </div>
+
+    <script>
+        // Product Data
+        const featuredProducts = [
+            {
+                name: "G-Shock Rainbow Brick Wall",
+                price: "$120",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-dw5600-rainbow-brick-wall-digital-black-dw-5600rw-1-523081.jpg",
+                description: "Digital watch with rainbow brick wall pattern and robust features",
+                features: [
+                    "Shock Resistant Structure",
+                    "200M Water Resistance",
+                    "EL Backlight with Afterglow",
+                    "Rainbow Brick Pattern Design",
+                    "5 Daily Alarms",
+                    "World Time Function"
+                ]
+            },
+            {
+                name: "G-Shock Mudmaster",
+                price: "$400",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gw9500-mudmaster-master-of-g-digital-black-gw-9500mec-1-461314.jpg",
+                description: "Professional-grade digital watch with multiple sensors",
+                features: [
+                    "Mud Resist Construction",
+                    "Twin Sensor",
+                    "Super Illuminator LED Light",
+                    "Carbon Core Guard Structure",
+                    "Auto Calendar",
+                    "Vibration Resistance"
+                ]
+            },
+            {
+                name: "G-Shock GM2100 Rainbow",
+                price: "$220",
+                image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gm2100-rainbow-brick-wall-ana-digi-black-silver-gm-2100-rw-1a-743773.jpg",
+                description: "Ana-digi combination with rainbow accent design",
+                features: [
+                    "Metallic Rainbow Finish",
+                    "Octagonal Bezel Design",
+                    "Carbon Core Guard",
+                    "Double LED Light",
+                    "Solar Powered",
+                    "Bluetooth Connectivity"
+                ]
+            }
+        ];
+
+        // Blog Data
+        const blogPosts = [
+            {
+                title: "The Evolution of Smartwatches",
+                excerpt: "Explore how traditional watchmaking meets modern technology in the era of smart timepieces...",
+                image: "https://res.cloudinary.com/dpb2hk8jh/image/upload/v1736524138/Screenshot_2025-01-10_at_10.48.29_AM_j0r6xr.png",
+                author: "Shashwat Shrestha",
+                date: "January 9, 2025",
+                readTime: "5 min read"
+            },
+            {
+                title: "Sustainable Practices in Watch Manufacturing",
+                excerpt: "Discover how luxury watch brands are adopting eco-friendly practices while maintaining quality...",
+                image: "https://res.cloudinary.com/dpb2hk8jh/image/upload/v1736524369/Screenshot_2025-01-10_at_10.52.43_AM_zyphr5.png",
+                author: "Shashwat Shrestha",
+                date: "January 8, 2025",
+                readTime: "4 min read"
+            },
+            {
+                title: "The Art of Watch Movement",
+                excerpt: "Understanding the intricate mechanics behind luxury timepieces and their precise movements...",
+                image: "https://res.cloudinary.com/dpb2hk8jh/image/upload/v1736524417/nbtaz8uun6r9wrwpz0kl.png",
+                author: "Shashwat Shrestha",
+                date: "January 7, 2025",
+                readTime: "6 min read"
+            }
+        ];
+
+        // Populate Products
+        document.getElementById('featured-products').innerHTML = featuredProducts.map((product, index) => `
+            <div class="product-card">
+                <div class="product-image-container">
+                    <span class="price-badge">${product.price}</span>
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="overlay">
+                        <button class="quick-view-btn" onclick="showQuickView(${index})">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">${product.name}</h3>
+                    <p class="product-description">${product.description}</p>
+                    <button class="cart-button" onclick="addToCart(${index})">
+                        <span class="cart-icon"></span>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        `).join('');
+
+        // Populate Blog Posts
+        document.getElementById('latest-blogs').innerHTML = `
+            <div class="blog-grid">
+                ${blogPosts.map(post => `
+                    <div class="blog-card">
+                        <div class="blog-image-container">
+                            <img src="${post.image}" alt="${post.title}" class="blog-image">
+                        </div>
+                        <div class="blog-info">
+                            <h3 class="blog-title">${post.title}</h3>
+                            <p class="blog-description">${post.excerpt}</p>
+                            <div class="blog-meta">
+                                <span class="date">${post.date}</span>
+                                <span class="read-time">${post.readTime}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+
+        // Populate Blog Table
+        document.getElementById('blog-table-body').innerHTML = blogPosts.map(post => `
+            <tr>
+                <td>${post.title}</td>
+                <td>${post.author}</td>
+                <td>${post.date}</td>
+                <td>${post.readTime}</td>
+            </tr>
+        `).join('');
+
+        // Quick View Function
+        function showQuickView(index) {
+            const product = featuredProducts[index];
+            const modal = document.getElementById('productModal');
+            
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalTitle').textContent = product.name;
+            document.getElementById('modalPrice').textContent = product.price;
+            document.getElementById('modalDescription').textContent = product.description;
+            document.getElementById('modalFeatures').innerHTML = product.features
+                .map(feature => `<li>${feature}</li>`)
+                .join('');
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cart Functions
+        let cart = [];
+        
+        function addToCart(index) {
+            const product = featuredProducts[index];
+            cart.push(product);
+            updateCartCount();
+            showCartPopup();
+        }
+
+        function addToCartFromModal() {
+            const productName = document.getElementById('modalTitle').textContent;
+            const product = featuredProducts.find(p => p.name === productName);
+            if (product) {
+                cart.push(product);
+                updateCartCount();
+                showCartPopup();
+            }
+            closeModal();
+        }
+
+        function updateCartCount() {
+            document.getElementById('cartCount').textContent = cart.length;
+        }
+
+        function showCartPopup() {
+            const popup = document.getElementById('cartPopup');
+            popup.classList.add('show');
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 3000);
+        }
+
+        // Blog View Toggle
+        document.querySelectorAll('.view-toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const view = toggle.dataset.view;
+                document.querySelectorAll('.view-toggle').forEach(btn => btn.classList.remove('active'));
+                toggle.classList.add('active');
+                
+                if (view === 'grid') {
+                    document.querySelector('.blog-grid-view').classList.add('active');
+                    document.querySelector('.blog-table-view').classList.remove('active');
+                } else {
+                    document.querySelector('.blog-grid-view').classList.remove('active');
+                    document.querySelector('.blog-table-view').classList.add('active');
+                }
+            });
+        });
+
+        // Navigation Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('productModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

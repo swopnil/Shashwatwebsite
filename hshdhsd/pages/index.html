@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronos - Luxury Watch Store</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c4a777;
+            --dark-gold: #a88a5c;
+            --black: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Header & Navigation */
+        .navbar {
+            background-color: var(--black);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            color: var(--gold);
+            font-size: 1.8rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: var(--dark-gold);
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--gold) !important;
+        }
+        /* Add to your existing styles */
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--gold);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.nav-link {
+    position: relative;
+}
+
+/* Style for the checkout button */
+.checkout-now-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--gold);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.checkout-now-btn:hover {
+    background: var(--dark-gold);
+    transform: translateY(-2px);
+    color: white;
+    text-decoration: none;
+}
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 76px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s;
+            animation-fill-mode: both;
+        }
+
+        /* Product Card Styles */
+        .product-card {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .blog-table {
+            width: 100%;
+            margin-top: 2rem;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .blog-table th {
+            background: var(--black);
+            color: var(--light);
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .blog-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .blog-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .blog-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .blog-table .blog-title-cell {
+            font-weight: 500;
+            color: var(--black);
+        }
+
+        .blog-table .blog-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .blog-table .blog-author {
+            color: var(--gold);
+        }
+
+        .blog-table .blog-read-time {
+            text-align: center;
+            color: #666;
+        }
+
+        .blog-views {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        /* Blog Card Styles */
+.blog-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-image img {
+    transform: scale(1.05);
+}
+
+.blog-content {
+    padding: 1.5rem;
+}
+
+.blog-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--black);
+}
+
+.blog-excerpt {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.read-more-link {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.read-more-link:hover {
+    color: var(--dark-gold);
+}
+
+/* Product Card Styles */
+
+        .view-toggle {
+            background: none;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-toggle.active {
+            background: var(--gold);
+            color: white;
+        }
+
+        .blog-grid-view, .blog-table-view {
+            display: none;
+        }
+
+        .blog-grid-view.active, .blog-table-view.active {
+            display: block;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+            background: #f8f9fa;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .price-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-card:hover .overlay {
+            opacity: 1;
+        }
+
+        .quick-view-btn {
+            background: white;
+            color: var(--black);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .product-card:hover .quick-view-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .quick-view-btn:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--black);
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .add-to-cart-btn {
+            background: var(--gold);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--dark-gold);
+            transform: translateY(-2px);
+        }
+
+        .view-more-btn {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .view-more-btn:hover {
+            background: var(--dark-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Section Styling */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+/* Add to your existing styles section */
+/* Product Modal Styles */
+.product-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    overflow-y: auto;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.product-modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    max-width: 1000px;
+    width: 100%;
+    position: relative;
+    margin: 20px auto;
+    animation: modalFadeIn 0.3s ease-out;
+    overflow: hidden;
+}
+
+.modal-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.product-image-large {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.modal-price-tag {
+    background: var(--gold);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    display: inline-block;
+    margin: 20px 0;
+    font-size: 1.2rem;
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.tab-button.active {
+    border-bottom-color: var(--gold);
+    color: var(--gold);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    
+.product-card {
+    height: 100%;
+    margin-bottom: 40px;  /* Increased bottom margin */
+}
+
+.product-image-container {
+    height: 350px;  /* Made images taller */
+}
+
+.product-title {
+    font-size: 1.3rem;  /* Larger title */
+}
+
+.product-description {
+    font-size: 1rem;  /* Slightly larger description */
+}
+
+/* Update animation delays for 3 items */
+.product-card:nth-child(1) { animation-delay: 0.1s; }
+.product-card:nth-child(2) { animation-delay: 0.2s; }
+.product-card:nth-child(3) { animation-delay: 0.3s; }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">CHRONOS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+               <!-- Update the existing navbar-nav -->
+<ul class="navbar-nav ms-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="index.html">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="products.html">Products</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="blog.html">Blog</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="about.html">About</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="contact.html">Contact</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="checkout.html">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
+    </li>
+</ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Timeless Elegance</h1>
+            <p class="hero-text">Discover our exclusive collection of luxury timepieces that blend sophistication with precision.</p>
+            <a href="products.html" class="view-more-btn">Explore Collection</a>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="container py-5">
+        <h2 class="section-title display-4 mb-5">Featured Collection</h2>
+        <div class="row" id="featured-products">
+            <!-- Products will be inserted here by JavaScript -->
+        </div>
+        <div class="text-center mt-5">
+            <a href="products.html" class="view-more-btn">
+                View More Products
+            </a>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <h2 class="section-title display-4 mb-5">Latest Insights</h2>
+        
+        <!-- View Toggle Buttons -->
+        <div class="blog-views">
+            <button class="view-toggle active" data-view="grid">
+                <i class="fas fa-th"></i> Grid View
+            </button>
+            <button class="view-toggle" data-view="table">
+                <i class="fas fa-list"></i> Table View
+            </button>
+        </div>
+
+        <!-- Grid View -->
+        <div class="blog-grid-view active">
+            <div class="row" id="latest-blogs">
+                <!-- Blog posts will be inserted here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Table View -->
+        <div class="blog-table-view">
+            <table class="blog-table">
+                <thead>
+                    <tr>
+                        <th>Article</th>
+                        <th>Author</th>
+                        <th>Date</th>
+                        <th>Read Time</th>
+                    </tr>
+                </thead>
+                <tbody id="blog-table-body">
+                    <!-- Table rows will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="blog.html" class="view-more-btn">
+                Read More Articles
+            </a>
+        </div>
+    </section>
+
+
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Products Script -->
+<!-- Replace the existing Products Script section with this: -->
+<script>
+            const blogPosts = [
+            {
+                title: "The Evolution of Smartwatches",
+                excerpt: "Explore how traditional watchmaking meets modern technology in the era of smart timepieces...",
+                image: "https://res.cloudinary.com/dpb2hk8jh/image/upload/v1736524138/Screenshot_2025-01-10_at_10.48.29_AM_j0r6xr.png",
+                author: "Shashwat Shrestha",
+                date: "January 9, 2025",
+                readTime: "5 min read"
+            },
+            {
+                title: "Sustainable Practices in Watch Manufacturing",
+                excerpt: "Discover how luxury watch brands are adopting eco-friendly practices while maintaining quality...",
+                image: "https://res.cloudinary.com/dpb2hk8jh/image/upload/v1736524369/Screenshot_2025-01-10_at_10.52.43_AM_zyphr5.png",
+                author: "Shashwat Shrestha",
+                date: "January 8, 2025",
+                readTime: "4 min read"
+            },
+            {
+                title: "The Art of Watch Movement",
+                excerpt: "Understanding the intricate mechanics behind luxury timepieces and their precise movements...",
+                image: "https://res.cloudinary.com/dpb2hk8jh/image/upload/v1736524417/nbtaz8uun6r9wrwpz0kl.png",
+                author: "Shashwat Shrestha",
+                date: "January 7, 2025",
+                readTime: "6 min read"
+            }
+        ];
+
+        // Populate blog posts in grid view
+        const blogsContainer = document.getElementById('latest-blogs');
+        if (blogsContainer) {
+            blogsContainer.innerHTML = blogPosts.map(post => `
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <article class="blog-card">
+                        <div class="blog-image">
+                            <img src="${post.image}" alt="${post.title}">
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title">${post.title}</h3>
+                            <p class="blog-excerpt">${post.excerpt}</p>
+                            <div class="blog-meta">
+                                <span>${post.date} · ${post.readTime}</span>
+                                <a href="blog.html" class="read-more-link">
+                                    Read More 
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            `).join('');
+        }
+
+        // Populate blog posts in table view
+        const tableBody = document.getElementById('blog-table-body');
+        if (tableBody) {
+            tableBody.innerHTML = blogPosts.map(post => `
+                <tr>
+                    <td class="blog-title-cell">${post.title}</td>
+                    <td class="blog-author">${post.author}</td>
+                    <td class="blog-date">${post.date}</td>
+                    <td class="blog-read-time">${post.readTime}</td>
+                </tr>
+            `).join('');
+        }
+
+        // View toggle functionality
+        const viewToggles = document.querySelectorAll('.view-toggle');
+        viewToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                // Update toggle buttons
+                viewToggles.forEach(btn => btn.classList.remove('active'));
+                toggle.classList.add('active');
+
+                // Update views
+                const viewType = toggle.dataset.view;
+                document.querySelector('.blog-grid-view').classList.toggle('active', viewType === 'grid');
+                document.querySelector('.blog-table-view').classList.toggle('active', viewType === 'table');
+            });
+        });
+
+ 
+
+  const featuredProducts = [
+    {
+        name: "G-Shock Rainbow Brick Wall",
+        price: "$120",
+        image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-dw5600-rainbow-brick-wall-digital-black-dw-5600rw-1-523081.jpg",
+        description: "Digital watch with rainbow brick wall pattern and robust features. Features shock resistance, 200M water resistance, and EL backlight. The unique rainbow pattern adds a distinctive style to the classic G-Shock design.",
+        features: [
+            "Shock Resistant Structure",
+            "200M Water Resistance",
+            "EL Backlight with Afterglow",
+            "Rainbow Brick Pattern Design",
+            "5 Daily Alarms",
+            "World Time Function"
+        ],
+        specifications: {
+            movement: "Digital Quartz",
+            case: "Resin/Stainless Steel",
+            size: "45.4mm",
+            waterResistance: "200M",
+            glass: "Mineral Glass",
+            strap: "Resin Band",
+            functions: "Stopwatch, Timer, World Time, 5 Alarms",
+            warranty: "2 Years International"
+        }
+    },
+    {
+        name: "G-Shock Mudmaster",
+        price: "$400",
+        image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gw9500-mudmaster-master-of-g-digital-black-gw-9500mec-1-461314.jpg",
+        description: "Professional-grade digital watch with multiple sensors. Built to withstand the harshest environments with mud-resistant buttons and gaskets.",
+        features: [
+            "Mud Resist Construction",
+            "Twin Sensor",
+            "Super Illuminator LED Light",
+            "Carbon Core Guard Structure",
+            "Auto Calendar",
+            "Vibration Resistance"
+        ],
+        specifications: {
+            movement: "Digital Quartz with Sensors",
+            case: "Carbon Core Guard",
+            size: "54.1mm",
+            waterResistance: "200M",
+            glass: "Sapphire Crystal",
+            strap: "Resin Composite Band",
+            functions: "Digital Compass, Thermometer, World Time",
+            warranty: "2 Years International"
+        }
+    },
+    {
+        name: "G-Shock GM2100 Rainbow",
+        price: "$220",
+        image: "https://cdn.shopify.com/s/files/1/0074/5432/6835/files/g-shock-gm2100-rainbow-brick-wall-ana-digi-black-silver-gm-2100-rw-1a-743773.jpg",
+        description: "Ana-digi combination with rainbow accent design. Features the signature octagonal bezel with a modern rainbow finish.",
+        features: [
+            "Metallic Rainbow Finish",
+            "Octagonal Bezel Design",
+            "Carbon Core Guard",
+            "Double LED Light",
+            "Solar Powered",
+            "Bluetooth Connectivity"
+        ],
+        specifications: {
+            movement: "Analog-Digital",
+            case: "Metal/Resin",
+            size: "44.4mm",
+            waterResistance: "200M",
+            glass: "Mineral Glass",
+            strap: "Resin Band",
+            functions: "World Time, Stopwatch, Timer, Bluetooth",
+            warranty: "2 Years International"
+        }
+    }
+];
+
+let currentProductIndex = 0;
+
+// Get the products container element
+const productsContainer = document.getElementById('featured-products');
+
+// Populate featured products
+productsContainer.innerHTML = featuredProducts.map((product, index) => `
+    <div class="col-lg-4 col-md-6">
+        <div class="product-card">
+            <div class="product-image-container">
+                <span class="price-badge">${product.price}</span>
+                <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='/api/placeholder/400/300'">
+                <div class="overlay">
+                    <button class="quick-view-btn" onclick="showQuickView(${index})">Quick View</button>
+                </div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-description">${product.description.substring(0, 100)}...</p>
+                <button class="add-to-cart-btn" onclick="addToCart(${index})">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+`).join('');
+
+// Quick View function
+function showQuickView(index) {
+    currentProductIndex = index;
+    const product = featuredProducts[index];
+    
+    // Update modal content
+    document.getElementById('modalImage').src = product.image;
+    document.getElementById('modalTitle').textContent = product.name;
+    document.getElementById('modalDescription').textContent = product.description;
+    document.getElementById('modalPrice').textContent = product.price;
+    
+    // Update features
+    const featuresList = document.getElementById('modalFeatures');
+    featuresList.innerHTML = product.features.map(feature => `<li>${feature}</li>`).join('');
+    
+    // Update specifications
+    const specs = product.specifications;
+    document.getElementById('specMovement').textContent = specs.movement;
+    document.getElementById('specCase').textContent = specs.case;
+    document.getElementById('specSize').textContent = specs.size;
+    document.getElementById('specWater').textContent = specs.waterResistance;
+    document.getElementById('specGlass').textContent = specs.glass;
+    document.getElementById('specStrap').textContent = specs.strap;
+    document.getElementById('specFunctions').textContent = specs.functions;
+    document.getElementById('specWarranty').textContent = specs.warranty;
+    
+    // Show modal
+    document.getElementById('productModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close modal function
+function closeModal() {
+    document.getElementById('productModal').classList.remove('show');
+    document.body.style.overflow = 'auto';
+}
+
+// Show tab function
+function showTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    document.getElementById(tabName + 'Tab').classList.add('active');
+    event.target.classList.add('active');
+}
+
+// Cart functions
+function addToCart(index) {
+    const product = featuredProducts[index];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    showCartPopup();
+    
+    // Remove existing checkout button if any
+    const existingBtn = document.querySelector('.checkout-now-btn');
+    if (existingBtn) {
+        existingBtn.remove();
+    }
+
+    // Add floating checkout button
+    const checkoutBtn = document.createElement('a');
+    checkoutBtn.href = 'checkout.html';
+    checkoutBtn.className = 'checkout-now-btn';
+    checkoutBtn.innerHTML = `
+        <i class="fas fa-shopping-cart"></i>
+        Checkout Now
+    `;
+    
+    document.body.appendChild(checkoutBtn);
+}
+
+function addToCartFromModal() {
+    addToCart(currentProductIndex);
+    closeModal();
+}
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = document.getElementById('cartCount');
+    if (cartCount) {
+        cartCount.textContent = cart.length;
+    }
+}
+
+function showCartPopup() {
+    const popup = document.getElementById('cartPopup');
+    popup.classList.add('show');
+    setTimeout(() => {
+        popup.classList.remove('show');
+    }, 3000);
+}
+
+// Close modal when clicking outside
+document.getElementById('productModal').addEventListener('click', function(event) {
+    if (event.target === this) {
+        closeModal();
+    }
+});
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', updateCartCount);
+
+// Listen for cart updates
+window.addEventListener('storage', (e) => {
+    if (e.key === 'cart') {
+        updateCartCount();
+    }
+});
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.style.padding = '0.5rem 0';
+        navbar.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
+  // Navbar scroll effect (continued)
+} else {
+        navbar.style.padding = '1rem 0';
+        navbar.style.backgroundColor = 'var(--black)';
+    }
+});
+// Update these cart functions in your existing JavaScript
+function addToCart(index) {
+    const product = featuredProducts[index];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    showCartPopup();
+    addCheckoutButton();
+}
+
+function addCheckoutButton() {
+    // Remove existing checkout button if any
+    const existingBtn = document.querySelector('.checkout-now-btn');
+    if (existingBtn) {
+        existingBtn.remove();
+    }
+
+    // Add floating checkout button
+    const checkoutBtn = document.createElement('a');
+    checkoutBtn.href = 'checkout.html';
+    checkoutBtn.className = 'checkout-now-btn';
+    checkoutBtn.innerHTML = `
+        <i class="fas fa-shopping-cart"></i>
+        Checkout Now
+    `;
+    
+    document.body.appendChild(checkoutBtn);
+}
+
+function showCartPopup() {
+    const popup = document.getElementById('cartPopup');
+    if (!popup) return; // Safety check
+    
+    popup.classList.add('show');
+    setTimeout(() => {
+        popup.classList.remove('show');
+    }, 3000);
+}
+
+// Update the addToCartFromModal function
+function addToCartFromModal() {
+    const product = featuredProducts[currentProductIndex];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    showCartPopup();
+    addCheckoutButton();
+    closeModal();
+}
+
+// Add this initialization
+document.addEventListener('DOMContentLoaded', () => {
+    updateCartCount();
+    // Check if there are items in cart and show checkout button if needed
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length > 0) {
+        addCheckoutButton();
+    }
+});
+</script>
+<!-- Add this before </body> -->
+<!-- Product Modal -->
+<div id="productModal" class="product-modal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-body">
+            <div class="product-grid">
+                <div class="product-image-section">
+                    <img id="modalImage" src="" alt="" class="product-image-large">
+                    <div class="text-center">
+                        <span id="modalPrice" class="modal-price-tag"></span>
+                        <button class="add-to-cart-btn" onclick="addToCartFromModal()">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+                <div class="product-details">
+                    <h2 id="modalTitle" class="h3 mb-4"></h2>
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="showTab('description')">Description</button>
+                        <button class="tab-button" onclick="showTab('specifications')">Specifications</button>
+                        <button class="tab-button" onclick="showTab('reviews')">Reviews</button>
+                    </div>
+                    <div id="descriptionTab" class="tab-content active">
+                        <p id="modalDescription" class="lead"></p>
+                        <div class="mt-4">
+                            <h4>Key Features</h4>
+                            <ul id="modalFeatures" class="mt-3">
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="specificationsTab" class="tab-content">
+                        <div class="specifications-grid">
+                            <div class="spec-label">Movement</div>
+                            <div class="spec-value" id="specMovement"></div>
+                            
+                            <div class="spec-label">Case Material</div>
+                            <div class="spec-value" id="specCase"></div>
+                            
+                            <div class="spec-label">Case Size</div>
+                            <div class="spec-value" id="specSize"></div>
+                            
+                            <div class="spec-label">Water Resistance</div>
+                            <div class="spec-value" id="specWater"></div>
+                            
+                            <div class="spec-label">Glass</div>
+                            <div class="spec-value" id="specGlass"></div>
+                            
+                            <div class="spec-label">Strap</div>
+                            <div class="spec-value" id="specStrap"></div>
+                            
+                            <div class="spec-label">Functions</div>
+                            <div class="spec-value" id="specFunctions"></div>
+                            
+                            <div class="spec-label">Warranty</div>
+                            <div class="spec-value" id="specWarranty"></div>
+                        </div>
+                    </div>
+                    <div id="reviewsTab" class="tab-content">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4>Customer Reviews</h4>
+                            <div class="overall-rating">
+                                <div class="stars" id="modalAverageRating"></div>
+                                <div class="text-muted" id="modalReviewCount"></div>
+                            </div>
+                        </div>
+                        <div id="reviewsContainer" class="reviews-container">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Cart Popup Notification -->
+<div id="cartPopup" class="cart-popup">
+    <div class="d-flex align-items-center gap-2">
+        <i class="fas fa-check-circle text-success"></i>
+        <span>Item added to cart!</span>
+    </div>
+</div></body>
+</html>
