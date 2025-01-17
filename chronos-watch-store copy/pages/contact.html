@@ -6,178 +6,9 @@
     <title>Contact Us - Chronos Watches</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/nav.css">
-
-
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-   
-        body {
-            line-height: 1.6;
-            padding-top: 60px;
-        }
-
-        /* Header Styles */
-        header {
-            background: var(--primary);
-            color: var(--light);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-        }
-
-
-      
-
-      
-
-        /* Contact Section */
-        .contact-header {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                        url('/api/placeholder/1920/600') center/cover;
-            height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light);
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .contact-header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .contact-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .contact-info {
-            animation: slideIn 1s ease-out;
-        }
-
-        .contact-info h2 {
-            color: var(--text);
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .info-item i {
-            color: var(--accent);
-            font-size: 1.5rem;
-        }
-
-        .contact-form {
-            background: var(--light);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            animation: fadeIn 1s ease-out;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .error-message {
-            color: var(--error);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            display: none;
-        }
-
-        .submit-btn {
-            background: var(--accent);
-            color: var(--light);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            background: #b39265;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body style="margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; background-color: #ffffff;">
     <header>
         <nav class="navbar">
             <div class="container nav-container">
@@ -198,74 +29,87 @@
                 </ul>
             </div>
         </nav>
-    
     </header>
 
-    <section class="contact-header">
-        <h1>Get in Touch</h1>
+    <section style="background: linear-gradient(45deg, rgba(253, 253, 253, 0.9), rgba(74, 69, 65, 0.9)), url('/api/placeholder/1920/600') center/cover; height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #ffffff; text-align: center; margin-bottom: 4rem; position: relative; overflow: hidden;">
+        <div style="position: relative; z-index: 2;">
+            <h1 style="font-size: 4rem; margin-bottom: 1.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-weight: 600; letter-spacing: 2px;">Get in Touch</h1>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); line-height: 1.8; letter-spacing: 0.5px;">We're here to help and answer any question you might have</p>
+        </div>
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100px; background: linear-gradient(transparent, #ffffff);"></div>
     </section>
 
-    <div class="contact-container">
-        <div class="contact-info">
-            <h2>Contact Information</h2>
-            <div class="info-item">
-                <i class="fas fa-map-marker-alt"></i>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; margin-bottom: 4rem;">
+        <div style="background: #ffffff; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); height: fit-content;">
+            <h2 style="color: #333; margin-bottom: 2rem; font-size: 2rem; position: relative; padding-bottom: 1rem;">Contact Information
+                <span style="position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background: #d4af37;"></span>
+            </h2>
+            
+            <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; padding: 1rem; border-radius: 10px; transition: all 0.3s; background: #f8f9fa;">
+                <i class="fas fa-map-marker-alt" style="color: #d4af37; font-size: 1.8rem; padding-top: 5px;"></i>
                 <div>
-                    <h3>Address</h3>
-                    <p>123 Watch Street, Kathmandy 44600, Nepal</p>
+                    <h3 style="color: #333; margin-bottom: 0.5rem; font-size: 1.2rem;">Address</h3>
+                    <p style="color: #666; line-height: 1.6;">123 Watch Street, Kathmandy 44600, Nepal</p>
                 </div>
             </div>
-            <div class="info-item">
-                <i class="fas fa-phone"></i>
+
+            <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; padding: 1rem; border-radius: 10px; transition: all 0.3s; background: #f8f9fa;">
+                <i class="fas fa-phone" style="color: #d4af37; font-size: 1.8rem; padding-top: 5px;"></i>
                 <div>
-                    <h3>Phone</h3>
-                    <p>+977 123-456-7890</p>
+                    <h3 style="color: #333; margin-bottom: 0.5rem; font-size: 1.2rem;">Phone</h3>
+                    <p style="color: #666; line-height: 1.6;">+977 123-456-7890</p>
                 </div>
             </div>
-            <div class="info-item">
-                <i class="fas fa-envelope"></i>
+
+            <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; padding: 1rem; border-radius: 10px; transition: all 0.3s; background: #f8f9fa;">
+                <i class="fas fa-envelope" style="color: #d4af37; font-size: 1.8rem; padding-top: 5px;"></i>
                 <div>
-                    <h3>Email</h3>
-                    <p>info@chronoswatches.com</p>
+                    <h3 style="color: #333; margin-bottom: 0.5rem; font-size: 1.2rem;">Email</h3>
+                    <p style="color: #666; line-height: 1.6;">info@chronoswatches.com</p>
                 </div>
             </div>
-            <div class="info-item">
-                <i class="fas fa-clock"></i>
+
+            <div style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1rem; border-radius: 10px; transition: all 0.3s; background: #f8f9fa;">
+                <i class="fas fa-clock" style="color: #d4af37; font-size: 1.8rem; padding-top: 5px;"></i>
                 <div>
-                    <h3>Business Hours</h3>
-                    <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                    <p>Saturday: 10:00 AM - 4:00 PM</p>
+                    <h3 style="color: #333; margin-bottom: 0.5rem; font-size: 1.2rem;">Business Hours</h3>
+                    <p style="color: #666; line-height: 1.6;">Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM</p>
                 </div>
             </div>
         </div>
 
-        <form class="contact-form" id="contactForm">
-            <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" required>
-                <div class="error-message" id="nameError">Please enter your full name</div>
+        <form class="contact-form" id="contactForm" style="background: #ffffff; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+            <div style="margin-bottom: 2rem;">
+                <label for="name" style="display: block; margin-bottom: 0.8rem; color: #333; font-weight: 500;">Full Name *</label>
+                <input type="text" id="name" name="name" required style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; transition: all 0.3s; outline: none;">
+                <div class="error-message" id="nameError" style="color: #dc3545; font-size: 0.9rem; margin-top: 0.5rem; display: none;">Please enter your full name</div>
             </div>
-            <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required>
-                <div class="error-message" id="emailError">Please enter a valid email address</div>
+
+            <div style="margin-bottom: 2rem;">
+                <label for="email" style="display: block; margin-bottom: 0.8rem; color: #333; font-weight: 500;">Email Address *</label>
+                <input type="email" id="email" name="email" required style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; transition: all 0.3s; outline: none;">
+                <div class="error-message" id="emailError" style="color: #dc3545; font-size: 0.9rem; margin-top: 0.5rem; display: none;">Please enter a valid email address</div>
             </div>
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone">
-                <div class="error-message" id="phoneError">Please enter a valid phone number</div>
+
+            <div style="margin-bottom: 2rem;">
+                <label for="phone" style="display: block; margin-bottom: 0.8rem; color: #333; font-weight: 500;">Phone Number</label>
+                <input type="tel" id="phone" name="phone" style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; transition: all 0.3s; outline: none;">
+                <div class="error-message" id="phoneError" style="color: #dc3545; font-size: 0.9rem; margin-top: 0.5rem; display: none;">Please enter a valid phone number</div>
             </div>
-            <div class="form-group">
-                <label for="subject">Subject *</label>
-                <input type="text" id="subject" name="subject" required>
-                <div class="error-message" id="subjectError">Please enter a subject</div>
+
+            <div style="margin-bottom: 2rem;">
+                <label for="subject" style="display: block; margin-bottom: 0.8rem; color: #333; font-weight: 500;">Subject *</label>
+                <input type="text" id="subject" name="subject" required style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; transition: all 0.3s; outline: none;">
+                <div class="error-message" id="subjectError" style="color: #dc3545; font-size: 0.9rem; margin-top: 0.5rem; display: none;">Please enter a subject</div>
             </div>
-            <div class="form-group">
-                <label for="message">Message *</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-                <div class="error-message" id="messageError">Please enter your message</div>
+
+            <div style="margin-bottom: 2rem;">
+                <label for="message" style="display: block; margin-bottom: 0.8rem; color: #333; font-weight: 500;">Message *</label>
+                <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; transition: all 0.3s; outline: none; resize: vertical;"></textarea>
+                <div class="error-message" id="messageError" style="color: #dc3545; font-size: 0.9rem; margin-top: 0.5rem; display: none;">Please enter your message</div>
             </div>
-            <button type="submit" class="submit-btn">Send Message</button>
+
+            <button type="submit" class="submit-btn" style="background: #d4af37; color: #ffffff; border: none; padding: 1.2rem 2rem; border-radius: 8px; font-size: 1.1rem; font-weight: 500; cursor: pointer; transition: all 0.3s; width: 100%; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);">Send Message</button>
         </form>
     </div>
 
@@ -326,9 +170,20 @@
             }
         });
 
-        // Real-time validation
+        // Add focus effects
         const inputs = document.querySelectorAll('input, textarea');
         inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#d4af37';
+                this.style.boxShadow = '0 0 0 3px rgba(212, 175, 55, 0.2)';
+            });
+
+            input.addEventListener('blur', function() {
+                this.style.borderColor = '#eee';
+                this.style.boxShadow = 'none';
+            });
+
+            // Real-time validation
             input.addEventListener('input', function() {
                 const errorElement = document.getElementById(`${this.id}Error`);
                 if (errorElement) {
